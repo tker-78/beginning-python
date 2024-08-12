@@ -7,3 +7,19 @@
 
 また、そのプロジェクト開発でテストツールの使用方法についても学ぶ。
 
+
+## dockerの実行について
+
+各sectionにDockerfileとdocker.shを用意しています。
+
+```
+$ sh docker.sh
+```
+
+
+```bash
+#!/bin/bash
+docker build -t section9 .
+docker run section9
+```
+
