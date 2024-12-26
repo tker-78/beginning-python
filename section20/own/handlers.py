@@ -12,21 +12,38 @@ class Handler(object):
             # 引数を渡して実行する
             return method(*args)
 
-    # callbackメソッドのprefixに'start_'を渡すラッパー
     def start(self, name):
+        # callbackメソッドのprefixに'start_'を渡すラッパー
         return self.callback('start_', name)
 
-    # callbackメソッドのprefixに'end_'を渡すラッパー
     def end(self, name):
+        # callbackメソッドのprefixに'end_'を渡すラッパー
         return self.callback('end_', name)
 
-    # 置換を行うメソッドを探し出して
-    # メソッドを返すメソッド(実行はしない)
     def sub(self, name):
+        # 置換を行うメソッドを探し出して
+        # メソッドを返すメソッド(実行はしない)
         # todo: あとで実装する
         pass
 
 
 
 class HTMLRenderer(Handler):
-    pass
+    """
+    start_heading:
+    end_heading:
+    """
+
+    def start_heading(self):
+        print('<h2>')
+
+    def end_heading(self):
+        print('</h2>')
+
+    def feed(self, data):
+        """
+        ruleに該当しない部分をprintする
+        """
+        print(data)
+
+
