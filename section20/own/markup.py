@@ -2,6 +2,7 @@ from handlers import *
 from rules import *
 from util import *
 import sys
+import re
 
 class Parser():
     """
@@ -16,10 +17,19 @@ class Parser():
     def add_rule(self, rule):
         self.rules.append(rule)
 
-    def parse(self, file):
+    def add_filter(self, pattern, name):
+        def filter(block, handler):
+            return re.sub(pattern, handler.sub(name), block)
+        self.filters.append(filter)
 
+    def parse(self, file):
         self.handler.start('document')
         for block in blocks(file):
+            # 置換の処理(emphasis, url, mailto)
+            for filter in self.filters:
+                block = filter(block, self.handler) # 置換を実行し、blockを返す。
+
+            # レンダリングの処理
             for rule in self.rules:
                 if rule.condition(block):
                     last = rule.action(block, self.handler)

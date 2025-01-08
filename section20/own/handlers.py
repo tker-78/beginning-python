@@ -63,5 +63,9 @@ class HTMLRenderer(Handler):
     def feed(self, data):
         print(data)
 
+    def sub_emphasis(self, match):
+        return f'<span style="font-weight: bold;">{match.group(1)}</span>'
+
+
 
 
