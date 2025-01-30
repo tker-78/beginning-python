@@ -1,7 +1,8 @@
-# 円を描く
-from reportlab.graphics.shapes import *
+from reportlab.graphics.shapes import Drawing, String
 from reportlab.graphics import renderPDF
 
-d = Drawing(400, 200)
-d.add(Circle(cx=100, cy=100, r=50, fillColor=None))
-renderPDF.drawToFile(d, 'circle.pdf')
+d = Drawing(100, 100)
+s = String(50, 50, 'Hello world!', textAnchor='middle')
+
+d.add(s)
+renderPDF.drawToFile(d, "hello.pdf", "A simple PDF file")
